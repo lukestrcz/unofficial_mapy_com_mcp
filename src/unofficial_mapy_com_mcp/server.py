@@ -17,7 +17,7 @@ from unofficial_mapy_com_mcp.models.settings import Settings
 @asynccontextmanager
 async def live_span(_: FastMCP[Any]) -> AsyncIterator[None]:
     settings = Settings()  # pyright: ignore
-    ApiMapyClientManager.setup_client(settings.api_key.get_secret_value())
+    ApiMapyClientManager.setup_client(settings.api_key.get_secret_value(), settings.timeout)
     try:
         yield
     finally:

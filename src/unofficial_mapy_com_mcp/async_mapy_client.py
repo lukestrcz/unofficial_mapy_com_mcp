@@ -9,10 +9,10 @@ NOT_FOUND = 404
 
 
 class AsyncMapyClient:
-    def __init__(self, apikey: str):
+    def __init__(self, apikey: str, timeout: float | None) -> None:
         self.apikey = apikey
         self.client = httpx.AsyncClient(
-            base_url='https://api.mapy.cz/v1', headers={'X-Mapy-Api-Key': apikey}, http2=True
+            base_url='https://api.mapy.cz/v1', headers={'X-Mapy-Api-Key': apikey}, http2=True, timeout=timeout
         )
 
     async def aclose(self) -> None:
@@ -70,8 +70,8 @@ class ApiMapyClientManager:
         return cls._client
 
     @classmethod
-    def setup_client(cls, api_key: str) -> None:
-        cls._client = AsyncMapyClient(api_key)
+    def setup_client(cls, api_key: str, timeout: float | None) -> None:
+        cls._client = AsyncMapyClient(api_key, timeout)
 
     @classmethod
     async def tear_down_client(cls) -> None:
