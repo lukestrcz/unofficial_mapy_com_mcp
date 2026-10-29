@@ -74,7 +74,7 @@ def entry_point() -> None:  # pragma: nocover
         pass
 
     with asyncio.Runner(loop_factory=loop_factory) as runner:
-        runner.run(mcp.run_sse_async())
+        runner.run(mcp.run_stdio_async())
 
 
 if __name__ == '__main__':

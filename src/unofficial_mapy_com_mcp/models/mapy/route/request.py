@@ -17,7 +17,7 @@ class RouteRequest(BaseModel):
     start: RouteCoordinates
     end: RouteCoordinates
     routeType: RouteType
-    waypoints: Annotated[list[Coordinates] | None, Field(default=None)]
+    waypoints: Annotated[list[RouteCoordinates] | None, Field(default=None)]
     avoid_toll: Annotated[bool | None, Field(default=False)]
 
     @classmethod

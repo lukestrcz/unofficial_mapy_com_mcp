@@ -6,7 +6,26 @@ from inline_snapshot import snapshot
 from mcp.types import TextContent
 
 from unofficial_mapy_com_mcp.models.mapy.common.types import Coordinates
+from unofficial_mapy_com_mcp.models.mapy.route.request import RouteRequest
 from unofficial_mapy_com_mcp.models.requests import ApiRouteRequest
+
+
+def test_route_request_waypoints_serialization():
+    api_req = ApiRouteRequest(
+        start=Coordinates(lon=14.4000936, lat=50.0898689),
+        end=Coordinates(lon=16.6085958, lat=49.1948039),
+        route_type='car_fast_traffic',
+        avoid_toll=False,
+        waypoints=[Coordinates(lon=15.5, lat=49.5)],
+    )
+    route_req = RouteRequest.from_api_model(api_req)
+    assert route_req.model_dump() == {
+        'start': '14.4000936,50.0898689',
+        'end': '16.6085958,49.1948039',
+        'routeType': 'car_fast_traffic',
+        'waypoints': ['15.5,49.5'],
+        'avoid_toll': False,
+    }
 
 
 @pytest.mark.asyncio

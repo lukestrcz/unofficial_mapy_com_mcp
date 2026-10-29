@@ -1,13 +1,16 @@
 [project]
 name = "unofficial-mapy-com-mcp"
 version = "0.1.0"
-description = "Add your description here"
+description = "Unofficial Model Context Protocol (MCP) server for the Mapy.com REST API (geocoding, reverse geocoding, routing)"
 requires-python = ">=3.12"
 dependencies = [
     "httpx[brotli,http2,zstd]==0.28.1",
     "h11>=0.16.0",
     "fastmcp==2.14.1",
-    "pydantic==2.12.5"]
+    "mcp<2.0.0",
+    "pydantic==2.12.5",
+    "pydantic-settings>=2.0.0",
+]
 [dependency-groups]
 dev = [
     "pytest-sugar>=1.0.0",
